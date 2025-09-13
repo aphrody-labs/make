@@ -96,10 +96,11 @@ struct option
 #define optional_argument	2
 
 #if defined (__STDC__) && __STDC__
-#ifdef __GNU_LIBRARY__
+#if defined (__GNU_LIBRARY__) || __STDC_VERSION__ >= 202311L
 /* Many other libraries have conflicting prototypes for getopt, with
    differences in the consts, in stdlib.h.  To avoid compilation
-   errors, only prototype getopt for the GNU C library.  */
+   errors, only prototype getopt for the GNU C library, or when using a
+   compiler implementing the C23 standard which changes () declarations.  */
 extern int getopt (int argc, char *const *argv, const char *shortopts);
 #else /* not __GNU_LIBRARY__ */
 extern int getopt ();
