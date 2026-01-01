@@ -668,7 +668,7 @@ void unload_all (void);
 # define SPIN(_s) spin (_s)
 void spin (const char* suffix);
 # define DBG(_f) dbg _f
-void dbg (const char *fmt, ...);
+void dbg (const char *fmt, ...) ATTRIBUTE ((__format__ (__printf__, 1, 2)));
 #else
 # define SPIN(_s)
 /* Never put this code into Git or a release.  */

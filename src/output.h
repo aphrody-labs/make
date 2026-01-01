@@ -34,10 +34,6 @@ extern unsigned int stdio_traced;
 #define OUTPUT_TRACED()     do{ stdio_traced = 1; }while(0)
 #define OUTPUT_IS_TRACED()  (!!stdio_traced)
 
-/* Write a buffer directly to the given file descriptor.
-   This handles errors etc.  */
-int output_write (int fd, const void *buffer, size_t len);
-
 /* Initialize and close a child output structure: if NULL do this program's
    output (this should only be done once).  */
 void output_init (struct output *out);

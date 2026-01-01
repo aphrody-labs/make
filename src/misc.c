@@ -613,7 +613,6 @@ spin (const char* type)
 void
 dbg (const char *fmt, ...)
 {
-  FILE *fp = fopen ("/tmp/gmkdebug.log", "a+");
   va_list args;
   char buf[4096];
 
@@ -621,9 +620,13 @@ dbg (const char *fmt, ...)
   vsprintf (buf, fmt, args);
   va_end (args);
 
-  fprintf(fp, "%u: %s\n", (unsigned) make_pid (), buf);
-  fflush (fp);
-  fclose (fp);
+  {
+    static FILE *fp = NULL;
+    if (!fp)
+      fp = fopen ("/tmp/gmkdebug.log", "a+");
+    fprintf (fp, "%u: %s\n", (unsigned) make_pid (), buf);
+    fflush (fp);
+  }
 }
 
 #endif
